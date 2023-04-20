@@ -1,14 +1,16 @@
 package Model;
 
-public class AVLTree<E extends Comparable<E>> {
+public class AVLTree<T extends Comparable<T>> implements TreeStructure<T> {
 
     private class Node {
-        E key;
+        T key;
         int height;
         Node left;
         Node right;
 
-        Node(E key) {
+
+
+        Node(T key) {
             this.key = key;
             this.height = 1;
             this.left = null;
@@ -25,7 +27,7 @@ public class AVLTree<E extends Comparable<E>> {
     }
 
     // Método add (insertar)
-    public void add(E key) {
+    public void add(T key) {
         if (!search(key)) {
             root = insert(root, key);
             count++;
@@ -33,19 +35,19 @@ public class AVLTree<E extends Comparable<E>> {
     }
 
     // Método get (buscar)
-    public E get(E key) {
+    public T get(T key) {
         Node result = searchNode(root, key);
         return result == null ? null : result.key;
     }
 
     // Método remove (eliminar)
-    public boolean remove(E key) {
-        if (search(key)) {
-            root = delete(root, key);
+    public T remove(T key) {
+        if (contains(key)) {
+            root = remove(root, key);
             count--;
-            return true;
+            return key;
         }
-        return false;
+        return null;
     }
 
     // Método count (número de nodos)
@@ -59,7 +61,7 @@ public class AVLTree<E extends Comparable<E>> {
     }
 
     // Método privado recursivo para insertar una clave en el árbol AVL
-    private Node insert(Node node, E key) {
+    private Node insert(Node node, T key) {
         if (node == null) {
             return new Node(key);
         }
@@ -137,7 +139,7 @@ public class AVLTree<E extends Comparable<E>> {
     }
 
     // Método privado recursivo para eliminar una clave en el árbol AVL
-    private Node delete(Node node, E key) {
+    private Node delete(Node node, T key) {
         if (node == null) {
             return node;
         }
@@ -187,8 +189,8 @@ public class AVLTree<E extends Comparable<E>> {
         return node;
     }
 
-    private E minValue(Node node) {
-        E minValue = node.key;
+    private T minValue(Node node) {
+        T minValue = node.key;
         while (node.left != null) {
             minValue = node.left.key;
             node = node.left;
@@ -196,7 +198,7 @@ public class AVLTree<E extends Comparable<E>> {
         return minValue;
     }
 
-    private Node searchNode(Node node, E key) {
+    private Node searchNode(Node node, T key) {
         if (node == null || node.key.compareTo(key) == 0) {
             return node;
         }
@@ -209,7 +211,7 @@ public class AVLTree<E extends Comparable<E>> {
     }
 
     // Método público para buscar una clave en el árbol AVL (retorna true si se encuentra)
-    public boolean search(E key) {
+    public boolean search(T key) {
         return searchNode(root, key) != null;
     }
 
@@ -228,4 +230,80 @@ public class AVLTree<E extends Comparable<E>> {
         inOrderTraversal(node.right);
     }
 
+    // Método público contains para verificar si un valor existe en el árbol AVL (retorna true si se encuentra)
+    public boolean contains(T key) {
+        return contains(root, key);
+    }
+
+    // Método privado recursivo contains para buscar un valor en el árbol AVL
+    private boolean contains(Node node, T key) {
+        if (node == null) {
+            return false;
+        }
+
+        int cmp = key.compareTo(node.key);
+
+        if (cmp < 0) {
+            return contains(node.left, key);
+        } else if (cmp > 0) {
+            return contains(node.right, key);
+        } else {
+            return true;
+        }
+    }
+
+
+
+    // Método privado recursivo remove para eliminar un valor en el árbol AVL
+    private Node remove(Node node, T key) {
+        if (node == null) {
+            return node;
+        }
+
+        int cmp = key.compareTo(node.key);
+
+        if (cmp < 0) {
+            node.left = remove(node.left, key);
+        } else if (cmp > 0) {
+            node.right = remove(node.right, key);
+        } else {
+            if (node.left == null || node.right == null) {
+                node = (node.left != null) ? node.left : node.right;
+            } else {
+                node.key = minValue(node.right);
+                node.right = remove(node.right, node.key);
+            }
+        }
+
+        if (node == null) {
+            return node;
+        }
+
+        node.height = 1 + Math.max(height(node.left), height(node.right));
+        int balance = getBalance(node);
+
+        // Caso Left-Left
+        if (balance > 1 && getBalance(node.left) >= 0) {
+            return rotateRight(node);
+        }
+
+        // Caso Right-Right
+        if (balance < -1 && getBalance(node.right) <= 0) {
+            return rotateLeft(node);
+        }
+
+        // Caso Left-Right
+        if (balance > 1 && getBalance(node.left) < 0) {
+            node.left = rotateLeft(node.left);
+            return rotateRight(node);
+        }
+
+        // Caso Right-Left
+        if (balance < -1 && getBalance(node.right) > 0) {
+            node.right = rotateRight(node.right);
+            return rotateLeft(node);
+        }
+
+        return node;
+    }
 }

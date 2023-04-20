@@ -1,0 +1,4 @@
+house,casa
+dog,perro
+food,comida
+water,agua
