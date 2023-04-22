@@ -1,15 +1,36 @@
 package Model;
 
+/**
+ * The type Avl tree.
+ *
+ * @param <T> the type parameter
+ */
 public class AVLTree<T extends Comparable<T>> implements TreeStructure<T> {
 
     private class Node {
+        /**
+         * The Key.
+         */
         T key;
+        /**
+         * The Height.
+         */
         int height;
+        /**
+         * The Left.
+         */
         Node left;
+        /**
+         * The Right.
+         */
         Node right;
 
 
-
+        /**
+         * Instantiates a new Node.
+         *
+         * @param key the key
+         */
         Node(T key) {
             this.key = key;
             this.height = 1;
@@ -21,6 +42,9 @@ public class AVLTree<T extends Comparable<T>> implements TreeStructure<T> {
     private Node root;
     private int count;
 
+    /**
+     * Instantiates a new Avl tree.
+     */
     public AVLTree() {
         root = null;
         count = 0;
@@ -210,12 +234,21 @@ public class AVLTree<T extends Comparable<T>> implements TreeStructure<T> {
         }
     }
 
-    // Método público para buscar una clave en el árbol AVL (retorna true si se encuentra)
+    /**
+     * Search boolean.
+     *
+     * @param key the key
+     * @return the boolean
+     */
+// Método público para buscar una clave en el árbol AVL (retorna true si se encuentra)
     public boolean search(T key) {
         return searchNode(root, key) != null;
     }
 
-    // Método para imprimir el árbol en orden ascendente
+    /**
+     * In order traversal.
+     */
+// Método para imprimir el árbol en orden ascendente
     public void inOrderTraversal() {
         inOrderTraversal(root);
         System.out.println();
@@ -230,7 +263,13 @@ public class AVLTree<T extends Comparable<T>> implements TreeStructure<T> {
         inOrderTraversal(node.right);
     }
 
-    // Método público contains para verificar si un valor existe en el árbol AVL (retorna true si se encuentra)
+    /**
+     * Contains boolean.
+     *
+     * @param key the key
+     * @return the boolean
+     */
+// Método público contains para verificar si un valor existe en el árbol AVL (retorna true si se encuentra)
     public boolean contains(T key) {
         return contains(root, key);
     }

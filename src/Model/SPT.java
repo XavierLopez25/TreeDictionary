@@ -4,14 +4,27 @@ import structure5.SplayTree;
 
 import java.util.Comparator;
 
+/**
+ * The type Spt.
+ *
+ * @param <T> the type parameter
+ */
 public class SPT<T extends Comparable<T>> implements TreeStructure<T> {
 
     private SplayTree<T> miInternalTree;
 
+    /**
+     * Instantiates a new Spt.
+     */
     public SPT() {
         miInternalTree = new SplayTree<T>();
     }
 
+    /**
+     * Instantiates a new Spt.
+     *
+     * @param comparador the comparador
+     */
     public SPT(Comparator<T> comparador) {
         miInternalTree = new SplayTree<T>(comparador);
     }
@@ -42,6 +55,11 @@ public class SPT<T extends Comparable<T>> implements TreeStructure<T> {
         return miInternalTree.isEmpty();
     }
 
+    /**
+     * Get internal tree splay tree.
+     *
+     * @return the splay tree
+     */
     public SplayTree<T> getInternalTree(){
         return miInternalTree;
     }

@@ -1,46 +1,50 @@
-// A class that converts a Structure to a Collection
+// A class that converts a TreeStructure to a Collection
 // (c) 2001 duane a. bailey
 package structure5;
 import java.util.Collection;
 import java.util.Iterator;
+
 /**
- * This utility class converts a Structure to a Collection.
+ * This utility class converts a TreeStructure to a Collection.
  * Users are advised to make use of the <code>values</code> method
- * that is part of every <code>Structure</code> that returns a <code>Collection</code>.
+ * that is part of every <code>TreeStructure</code> that returns a <code>Collection</code>.
  * <p>
  * This class is necessary because there are certain basic differences
  * in the interfaces of the two classes.
  * <p>
  * This class works provides a facade: methods of the Collection
- * interface are directly referred to the base Structure, or simple
+ * interface are directly referred to the base TreeStructure, or simple
  * code supports the interface.
- * <P>
+ * <p>
  * Example Usage:
- * <P>
+ * <p>
  * <pre>
  * public static void main(String[] argv){
- *      Structure struct = new Vector();
+ *      TreeStructure struct = new Vector();
  *      for(int i = 0; i < argv.length; i++) struct.add(argv[i]);
  *      Collection collect = new {@link #StructCollection(Structure) StructCollection(struct)};
- * } 
+ * }
  * </pre>
+ *
+ * @param <E> the type parameter
+ * @version $Id : StructCollection.java 29 2006-11-03 16:56:32Z bailey $
  * @author, 2001 duane a. bailey
- * @version $Id: StructCollection.java 29 2006-11-03 16:56:32Z bailey $
  * @since Java Structures, 2nd edition
  */
 @SuppressWarnings("unchecked")
 public class StructCollection<E> implements Collection<E>
 {
     /**
-     * The subordinate Structure
+     * The subordinate TreeStructure
      */
     protected Structure<E> base;
 
     /**
      * Constructs a Collection, based on the contents of the subordinate
-     * Structure object.
-     * @post the Collection is a facade for manipulations to a subordinate
-     * Structure.
+     * TreeStructure object.
+     *
+     * @param s the s
+     * @post the Collection is a facade for manipulations to a subordinate TreeStructure.
      */
     public StructCollection(Structure<E> s)
     {
@@ -48,9 +52,9 @@ public class StructCollection<E> implements Collection<E>
     }
 
     /**
-     * Add an object to the subordinate Structure, and return boolean
+     * Add an object to the subordinate TreeStructure, and return boolean
      * indicating success.
-     * @post the object o is added to the Structure, and true is returned
+     * @post the object o is added to the TreeStructure, and true is returned
      * @return true.
      */
     public boolean add(E o)
@@ -60,10 +64,10 @@ public class StructCollection<E> implements Collection<E>
     }
 
     /**
-     * Adds all the elements of another collection (c) into this Structure.
+     * Adds all the elements of another collection (c) into this TreeStructure.
      * A boolean value of true is returned.
      * @pre c is a valid collection
-     * @post the elements of c have been added to the Structure, and 
+     * @post the elements of c have been added to the TreeStructure, and
      *       the value true is returned if all adds returned true.
      * @return true if each of the adds returned true.
      */
@@ -79,7 +83,7 @@ public class StructCollection<E> implements Collection<E>
     }
 
     /**
-     * Remove all elements from the Structure.
+     * Remove all elements from the TreeStructure.
      * @post the subordinate structure is empty
      */
     public void clear()
@@ -103,7 +107,7 @@ public class StructCollection<E> implements Collection<E>
      * Returns true if all of the elements of c are contained within
      * the subordinate structure.
      * @pre c is a valid Collection
-     * @post returns true if all elements of c appear in this Structure
+     * @post returns true if all elements of c appear in this TreeStructure
      * @return true if c is a subset of this
      */
     public /*<T>*/ boolean containsAll(Collection<?> c)
@@ -121,7 +125,7 @@ public class StructCollection<E> implements Collection<E>
 
     /**
      * Compare one StructCollection with another.
-     * @pre o is of similar type to base Structure
+     * @pre o is of similar type to base TreeStructure
      * @post returns true if both objects appear equal as Structures
      * @return true iff Structures are equals
      */
@@ -229,7 +233,7 @@ public class StructCollection<E> implements Collection<E>
     }
 
     /**
-     * Construct an array of values found in the subordinate Structure.
+     * Construct an array of values found in the subordinate TreeStructure.
      * @post returns an array of objects containing the values of structure
      * @return array containing exactly the elements of this structure
      */

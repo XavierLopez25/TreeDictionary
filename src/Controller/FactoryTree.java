@@ -3,6 +3,9 @@ package Controller;
 import Model.*;
 
 
+/**
+ * The type Factory tree.
+ */
 public class FactoryTree {
 
     private TreeStructure<Word> resultado;
@@ -10,8 +13,10 @@ public class FactoryTree {
     private WordComparator<Word> comparator = new WordComparator<Word>();
 
     /**
-     * @param tipo
-     * @return
+     * Get instance tree structure.
+     *
+     * @param type the type
+     * @return tree structure
      */
     public TreeStructure<Word> getInstance(String type){
 

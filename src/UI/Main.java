@@ -1,3 +1,5 @@
+package UI;
+
 import Controller.FactoryTree;
 import Controller.ReadFile;
 import Model.TreeStructure;
@@ -6,7 +8,15 @@ import Model.Word;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The type Main.
+ */
 public class Main {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
 
             // Lectura de archivos
@@ -25,7 +35,7 @@ public class Main {
             // Creación del árbol
             Scanner sc = new Scanner(System.in);
             FactoryTree factory = new FactoryTree();
-            System.out.println("¿Qué tipo de árbol desea usar?: \n1. RBT \n2. SPT \n3. BST\n4. AVL Tree");
+            System.out.println("¿Qué tipo de árbol desea usar?: \n1. RBT (escribe RBT) \n2. SPT (escribe SplayTree) \n3. AVL Tree (escribe AVLTree)");
             String tipo = sc.nextLine();
             TreeStructure<Word> arbol = factory.getInstance(tipo);
             for (Word val1 : diccionario) {

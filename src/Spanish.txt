@@ -2,3 +2,7 @@ house,casa
 dog,perro
 food,comida
 water,agua
+homework,tarea
+woman,mujer
+town,pueblo
+yes,si

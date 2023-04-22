@@ -2,6 +2,11 @@ package Model;
 
 import java.util.Comparator;
 
+/**
+ * The type Word comparator.
+ *
+ * @param <T> the type parameter
+ */
 public class WordComparator<T> implements Comparator<T> {
 
     @Override

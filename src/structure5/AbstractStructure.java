@@ -1,4 +1,4 @@
-// A basic, abstract implementation of a Structure.
+// A basic, abstract implementation of a TreeStructure.
 // (c) 2001 duane a. bailey
 package structure5;
 import java.util.Collection;
@@ -7,7 +7,7 @@ import java.util.Iterator;
 /**
  * An abstract implementation of a basic, mutable data structure.
  * <p>
- * This abstract implementation of the <code>Structure</code> interface
+ * This abstract implementation of the <code>TreeStructure</code> interface
  * provides a good starting point for the implementation of a basic,
  * mutable data structure.  This implementation provides a workable
  * implementation of <code>isEmpty</code>, <code>contains</code>, and
@@ -19,10 +19,11 @@ import java.util.Iterator;
  * interface and have the <code>value</code> method simply return
  * <code>this</code>.  Because of peculiarities of both systems of
  * designing data structures, it is often best to avoid direct implementation
- * <code>java.util.Collection</code> and <code>Structure</code> in one class.
+ * <code>java.util.Collection</code> and <code>TreeStructure</code> in one class.
  *
+ * @param <E> the type parameter
+ * @version $Id : AbstractStructure.java 22 2006-08-21 19:27:26Z bailey $
  * @author, 2001 duane a. bailey
- * @version $Id: AbstractStructure.java 22 2006-08-21 19:27:26Z bailey $
  * @since Java Structures, 2nd edition
  */
 public abstract class AbstractStructure<E> implements Structure<E>
@@ -107,7 +108,7 @@ public abstract class AbstractStructure<E> implements Structure<E>
      * Returns a java.util.Collection wrapping this structure.
      * This particular implementation returns a <code>StructCollection</code>
      * whose methods may not provide the most efficent implementations
-     * of non-<code>Structure</code> <code>Collection</code> methods.
+     * of non-<code>TreeStructure</code> <code>Collection</code> methods.
      *
      * @post returns a <code>Collection</code> that may be used with
      *       Java's Collection Framework

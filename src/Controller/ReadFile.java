@@ -7,8 +7,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The type Read file.
+ */
 public class ReadFile {
 
+    /**
+     * Read lines array list.
+     *
+     * @param filename the filename
+     * @return the array list
+     */
     public static ArrayList<String> readLines(String filename) {
         ArrayList<String> lines = new ArrayList<String>();
         try {
